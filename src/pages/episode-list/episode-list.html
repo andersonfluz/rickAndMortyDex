@@ -1,0 +1,36 @@
+<!--
+  Generated template for the EpisodeListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color='morty'>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Episodes List</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list inset>
+    <ion-item *ngFor="let episode of listEpisode" (click)="details(episode.id)">
+      <ion-thumbnail item-start>
+          <img src="http://static.tvtropes.org/pmwiki/pub/images/rickandmorty.jpg">
+      </ion-thumbnail> 
+      <h2>{{episode.name}}</h2>
+      <h3>{{episode.episode}}</h3>
+      <p>{{episode.air_date}}</p>
+    </ion-item>
+  </ion-list>
+ 
+  <ion-infinite-scroll *ngIf="offset" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
