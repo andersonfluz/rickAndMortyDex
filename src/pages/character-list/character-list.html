@@ -5,14 +5,31 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>CharacterList</ion-title>
+  <ion-navbar color='morty'>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Characters List</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list inset>
+    <ion-item *ngFor="let character of listCharacter" (click)="details(character.id)">
+      <ion-avatar item-start>
+        <img src="{{character.image}}">
+      </ion-avatar>
+      <h2>{{character.name}}</h2>
+      <p>{{character.origin.name}}</p>
+    </ion-item>
+  </ion-list>
+ 
+  <ion-infinite-scroll *ngIf="offset" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
